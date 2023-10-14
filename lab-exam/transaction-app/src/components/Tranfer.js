@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import Receipt from "./Receipt";
+import "./Transfer.css";
+import jsonData from "./data.json";
 
 function Transfer() {
-  const sender = "0x2849234wkrnwkfniuy4234k34n232n4kj23n4";
-  const receiver = "0x284y4234k34n232n4kj23n4234wkrnwkfniu";
-  const txnID = "0x234b2jrj34g3nbtehi1312jh3k12benb4j23b4k1j2b3kj1b23k";
-  const blockID = "0xn23b4j23b4hj2b5jh3b45nb41n23khj12k3jk1n3kj1b43124";
-  const blockNumber = "10";
-  const gasUsed = "22134";
-
   const [amount, setAmount] = useState("");
   const [showReceipt, setShowReceipt] = useState(false);
 
@@ -16,40 +11,61 @@ function Transfer() {
     e.preventDefault();
     setShowReceipt(true);
   };
+
+  // Render the component once the data is fetched
   return (
-    <div>
+    <div className="body">
+      <h1>Transfer Project by 101502209</h1>
       <div className="transfer-div">
-        <h1>Transfer</h1>
-        <div>
-          <p>From: {sender}</p>
-          <p>To: {receiver}</p>
-          <form>
-            <label for="amount">Amount: </label>
-            <input
-              type="number"
-              id="amount"
-              value={amount}
-              placeholder="Enter amount"
-              min="1"
-              onChange={(e) => setAmount(e.target.value)}
-            />
-            <button type="submit" onClick={handleSubmit}>
-              Submit
-            </button>
-          </form>
-        </div>
+        <h2>Transfer</h2>
+        {jsonData && (
+          <div>
+            <p>
+              <span className="key-styling">From:</span> {jsonData[0].sender}
+            </p>
+            <p>
+              <span className="key-styling">To:</span> {jsonData[0].receiver}
+            </p>
+
+            <form>
+              <label for="amount" className="key-styling">
+                Amount:
+              </label>
+              <input
+                type="number"
+                id="amount"
+                value={amount}
+                placeholder="Enter amount"
+                min="1"
+                onChange={(e) => setAmount(e.target.value)}
+              />
+              <button type="submit" onClick={handleSubmit}>
+                Submit
+              </button>
+            </form>
+          </div>
+        )}
       </div>
-      {showReceipt && (
+      {showReceipt && amount !== "" && (
         <Receipt
-          txnHash={txnID}
-          blockHash={blockID}
-          bNo={blockNumber}
-          from={sender}
-          to={receiver}
+          txnHash={jsonData[0].txnID}
+          blockHash={jsonData[0].blockID}
+          bNo={jsonData[0].blockNumber}
+          from={jsonData[0].sender}
+          to={jsonData[0].receiver}
           amount={amount}
-          gas={gasUsed}
+          gas={jsonData[0].gasUsed}
         />
       )}
+      <p>
+        Made with ❤️ by{" "}
+        <a
+          href="https://www.linkedin.com/in/athika-fatima-1a59121aa/"
+          className="key-styling"
+        >
+          Athika Fatima
+        </a>
+      </p>
     </div>
   );
 }
