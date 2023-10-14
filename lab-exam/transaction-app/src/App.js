@@ -1,12 +1,11 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
-// import Transfer from "./components/Tranfer";
-import Receipt from "./components/Receipt";
+import Transfer from "./components/Tranfer";
 
 function App() {
   return (
     <div className="App">
-      <Receipt />
+      <Transfer />
     </div>
   );
 }

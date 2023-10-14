@@ -1,16 +1,17 @@
 import React from "react";
 
-function Receipt() {
+function Receipt(props) {
   return (
     <div>
       <h1>Receipt</h1>
       <div>
-        <p>Transaction Hash:</p>
-        <p>Block Hash:</p>
-        <p>Block Number:</p>
-        <p>From:</p>
-        <p>To:</p>
-        <p>Gas used:</p>
+        <p>Transaction Hash: {props.txnHash}</p>
+        <p>Block Hash: {props.blockHash}</p>
+        <p>Block Number: {props.bNo}</p>
+        <p>From: {props.from}</p>
+        <p>To: {props.to}</p>
+        <p>Amount: {props.amount}</p>
+        <p>Gas used: {props.gas}</p>
       </div>
     </div>
   );
