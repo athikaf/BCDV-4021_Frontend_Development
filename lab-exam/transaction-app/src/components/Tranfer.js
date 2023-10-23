@@ -16,47 +16,51 @@ function Transfer() {
   return (
     <div className="body">
       <h1>Transfer Project by 101502209</h1>
-      <div className="transfer-div">
-        <h2>Transfer</h2>
-        {jsonData && (
-          <div>
-            <p>
-              <span className="key-styling">From:</span> {jsonData[0].sender}
-            </p>
-            <p>
-              <span className="key-styling">To:</span> {jsonData[0].receiver}
-            </p>
+      <div className="main-div">
+        <div className="transfer-div">
+          <h2>Transfer</h2>
+          {jsonData && (
+            <div>
+              <p>
+                <span className="key-styling">From:</span> {jsonData[0].sender}
+              </p>
+              <p>
+                <span className="key-styling">To:</span> {jsonData[0].receiver}
+              </p>
 
-            <form>
-              <label for="amount" className="key-styling">
-                Amount:
-              </label>
-              <input
-                type="number"
-                id="amount"
-                value={amount}
-                placeholder="Enter amount"
-                min="1"
-                onChange={(e) => setAmount(e.target.value)}
-              />
-              <button type="submit" onClick={handleSubmit}>
-                Submit
-              </button>
-            </form>
-          </div>
-        )}
+              <form>
+                <label for="amount" className="key-styling">
+                  Amount:
+                </label>
+                <input
+                  type="number"
+                  id="amount"
+                  value={amount}
+                  placeholder="Enter amount"
+                  min="1"
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+                <button type="submit" onClick={handleSubmit}>
+                  Submit
+                </button>
+              </form>
+            </div>
+          )}
+        </div>
+        <div>
+          {showReceipt && amount !== "" && (
+            <Receipt
+              txnHash={jsonData[0].txnID}
+              blockHash={jsonData[0].blockID}
+              bNo={jsonData[0].blockNumber}
+              from={jsonData[0].sender}
+              to={jsonData[0].receiver}
+              amount={amount}
+              gas={jsonData[0].gasUsed}
+            />
+          )}
+        </div>
       </div>
-      {showReceipt && amount !== "" && (
-        <Receipt
-          txnHash={jsonData[0].txnID}
-          blockHash={jsonData[0].blockID}
-          bNo={jsonData[0].blockNumber}
-          from={jsonData[0].sender}
-          to={jsonData[0].receiver}
-          amount={amount}
-          gas={jsonData[0].gasUsed}
-        />
-      )}
       <p>
         Made with ❤️ by{" "}
         <a
